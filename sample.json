@@ -1,0 +1,76 @@
+{
+    "title": "Showcase Content Packet",
+    "description": "A collection of various content types to demonstrate the capabilities of the JSON Viewer.",
+    "items": [
+        {
+            "title": "MIS AMIGOS LOS DINOS, Y POR QUÉ HUIR DE ELLOS 🏃💨",
+            "date": "2026-01-26",
+            "type": "video",
+            "tags": [
+                "VIDEO",
+                "GAMING"
+            ],
+            "image": "https://i9.ytimg.com/vi/bneHpN5zHIo/mqdefault.jpg?v=69782f94&sqp=CJjs48sG&rs=AOn4CLD8A67E-1qSUbGztOBxMuLT5V92SQ",
+            "description": "Paseo por las zonas coloridas de Hytale pensando que habría paz. Grave error. Mis nuevos amigos los dinosaurios me dieron una bienvenida con mucho...",
+            "code": "FeresDev",
+            "videoUrl": "https://youtu.be/bneHpN5zHIo",
+            "duration": "21:27"
+        },
+        {
+            "type": "mixed",
+            "title": "The Art of Game Design",
+            "image": "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1000&auto=format&fit=crop",
+            "description": "Game design is an art form that combines storytelling, mechanics, and aesthetics. Explore how modern engines like Hytale and Godot are changing the landscape.",
+            "date": "2026-01-20",
+            "tags": [
+                "GAMING",
+                "DESIGN"
+            ],
+            "code": "Gamedev"
+        },
+        {
+            "type": "text",
+            "title": "Welcome to the Platform",
+            "content": "This application allows you to visualize JSON data in a human-readable format. Simply drag and drop your files or paste your content here to get started. The parser automatically detects content types."
+        },
+        {
+            "type": "list",
+            "title": "Supported Features",
+            "items": [
+                "Automatic Type Detection",
+                "Dark Mode Interface",
+                "Responsive Grid Layout",
+                "Real-time Validation",
+                "Drag & Drop Support"
+            ]
+        },
+        {
+            "type": "image",
+            "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop",
+            "alt": "Abstract Digital Art",
+            "title": "Digital Frontiers"
+        },
+        {
+            "type": "code",
+            "language": "javascript",
+            "content": "function detectType(item) {\n  if (item.videoUrl) return 'video';\n  if (item.image && item.description) return 'mixed';\n  return 'text';\n}"
+        },
+        {
+            "type": "link",
+            "title": "Antygravity Documentation",
+            "url": "https://antygravity.dev",
+            "favicon": "https://antygravity.dev/favicon.ico"
+        },
+        {
+            "type": "mixed",
+            "title": "Nature Inspired UI",
+            "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000&auto=format&fit=crop",
+            "description": "Designing interfaces that mimic the organic flow of nature can lead to more intuitive user experiences.",
+            "tags": [
+                "UI/UX",
+                "NATURE"
+            ],
+            "author": "DesignTeam"
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+/* Custom PrismJS theme for JSON */
+.prism-editor textarea {
+    outline: none !important;
+}
+
+/* Base token styles */
+code[class*="language-"],
+pre[class*="language-"] {
+    text-shadow: none !important;
+    font-family: inherit !important;
+}
+
+/* JSON Keys (Properties) */
+.token.property {
+    color: #3b82f6;
+    /* Blue-500 */
+}
+
+.dark .token.property {
+    color: #60a5fa;
+    /* Blue-400 */
+}
+
+/* JSON Strings (Values) */
+.token.string {
+    color: #10b981;
+    /* Emerald-500 */
+}
+
+.dark .token.string {
+    color: #34d399;
+    /* Emerald-400 */
+}
+
+/* Numbers */
+.token.number {
+    color: #f59e0b;
+    /* Amber-500 */
+}
+
+.dark .token.number {
+    color: #fbbf24;
+    /* Amber-400 */
+}
+
+/* Booleans */
+.token.boolean {
+    color: #ef4444;
+    /* Red-500 */
+}
+
+.dark .token.boolean {
+    color: #f87171;
+    /* Red-400 */
+}
+
+/* Punctuation */
+.token.punctuation {
+    color: #6b7280;
+    /* Gray-500 */
+}
+
+.dark .token.punctuation {
+    color: #9ca3af;
+    /* Gray-400 */
+}
+
+/* Operator */
+.token.operator {
+    background: transparent !important;
+}

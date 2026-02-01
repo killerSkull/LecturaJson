@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+
+  /* Custom Theme Colors mapped to CSS variables for v4 compatibility if needed, 
+     though tailwind.config.js should still work for theme extension. 
+     If config fails, we define theme here. */
+
+  /* Dark Mode Defaults */
+  --color-background-primary: #0f0f0f;
+  --color-background-secondary: #1a1a1a;
+  --color-background-tertiary: #2a2a2a;
+  --color-background-card: #242424;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+}
+
+:root.light {
+  color-scheme: light;
+  --color-background-primary: #f9fafb;
+  /* Gray 50 */
+  --color-background-secondary: #ffffff;
+  --color-background-tertiary: #f3f4f6;
+  --color-background-card: #ffffff;
+
+  --color-text-primary: #111827;
+  /* Gray 900 */
+  --color-text-secondary: #6b7280;
+  /* Gray 500 */
+
+  --color-accent: #2563eb;
+  /* Blue 600 */
+  --color-accent-hover: #1d4ed8;
+  /* Blue 700 */
+
+  /* Card borders need to be visible in light mode */
+  --color-border: #e5e7eb;
+}
+
+@theme {
+  --color-background-primary: var(--color-background-primary);
+  --color-background-secondary: var(--color-background-secondary);
+  --color-background-tertiary: var(--color-background-tertiary);
+  --color-background-card: var(--color-background-card);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+  --color-warning: var(--color-warning);
+
+  --animate-fade-in: fadeIn 0.3s ease-in-out;
+  --animate-slide-up: slideUp 0.4s ease-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
