@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { FileJson, Calculator, Share2, Check, Sun, Moon, Download, Users, HelpCircle } from 'lucide-react';
 import { exportToHtml } from '../../utils/htmlExport';
-import InstructionsModal from './InstructionsModal';
 import { pb } from '../../lib/pocketbase';
 import CountUp from '../UI/CountUp';
+import SettingsModal from './SettingsModal';
+import InstructionsModal from './InstructionsModal';
 
 const Header = ({ stats, isDarkMode, onToggleTheme, data }) => {
     const [copied, setCopied] = useState(false);
     const [visitorCount, setVisitorCount] = useState(null);
     const [showInstructions, setShowInstructions] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
+
+    // Initialize Theme Colors from LocalStorage
+    useEffect(() => {
+        const savedAccent = localStorage.getItem('theme_accent');
+        const savedAccentHover = localStorage.getItem('theme_accent_hover');
+
+        if (savedAccent) {
+            document.documentElement.style.setProperty('--color-accent', savedAccent);
+        }
+        if (savedAccentHover) {
+            document.documentElement.style.setProperty('--color-accent-hover', savedAccentHover);
+        }
+    }, []);
 
     useEffect(() => {
         let unsubscribe;
 
         const updateVisitorCount = async () => {
+            // ... existing visitor count logic ...
             try {
                 // 1. Try to get the existing counter
                 const records = await pb.collection('counters').getList(1, 1, {
@@ -113,6 +129,15 @@ const Header = ({ stats, isDarkMode, onToggleTheme, data }) => {
                     )}
 
                     <button
+                        onClick={() => setShowSettings(true)}
+                        className="p-1.5 md:p-2 rounded-full hover:bg-white/5 text-text-secondary hover:text-text-primary transition-colors"
+                        title="Configuración"
+                    >
+                        {/* Using a Gear/Settings Icon - borrowing HelpCircle place for now if needed or adding proper icon */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" /></svg>
+                    </button>
+
+                    <button
                         onClick={() => setShowInstructions(true)}
                         className="p-1.5 md:p-2 rounded-full hover:bg-white/5 text-text-secondary hover:text-text-primary transition-colors"
                         title="Instrucciones"
@@ -150,6 +175,7 @@ const Header = ({ stats, isDarkMode, onToggleTheme, data }) => {
             </header>
 
             {showInstructions && <InstructionsModal onClose={() => setShowInstructions(false)} />}
+            {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
         </>
     );
 };

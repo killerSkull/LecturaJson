@@ -6,7 +6,7 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-json';
 import './prism-theme.css'; // Custom styles
 
-const JsonEditor = ({ rawText, onTextChange, error, onLoadTemplate }) => {
+const JsonEditor = ({ rawText, onTextChange, error, onLoadTemplate, history }) => {
     const [isDragging, setIsDragging] = useState(false);
     const lineNumbersRef = useRef(null);
     const editorContainerRef = useRef(null);
@@ -79,6 +79,7 @@ const JsonEditor = ({ rawText, onTextChange, error, onLoadTemplate }) => {
                 onUpload={handleUpload}
                 onCopy={handleCopy}
                 onLoadTemplate={onLoadTemplate}
+                history={history}
             />
 
             <div className="relative flex-1 flex overflow-hidden group">

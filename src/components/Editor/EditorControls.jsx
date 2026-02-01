@@ -4,7 +4,7 @@ import { Upload, Copy, Trash2, AlignLeft, Minimize2, Check, Image as ImageIcon, 
 import AssetManager from './AssetManager';
 import { TEMPLATES } from '../../utils/templates';
 
-const EditorControls = ({ onFormat, onMinify, onClear, onUpload, onCopy, onLoadTemplate }) => {
+const EditorControls = ({ onFormat, onMinify, onClear, onUpload, onCopy, onLoadTemplate, history }) => {
     const fileInputRef = useRef(null);
     const [copied, setCopied] = React.useState(false);
     const [showAssets, setShowAssets] = React.useState(false);
@@ -24,11 +24,19 @@ const EditorControls = ({ onFormat, onMinify, onClear, onUpload, onCopy, onLoadT
     }
 
     const handleTemplateSelect = (e) => {
-        const templateName = e.target.value;
-        if (templateName && TEMPLATES[templateName]) {
-            onLoadTemplate(TEMPLATES[templateName]);
-            e.target.value = ""; // Reset selection
+        const value = e.target.value;
+
+        if (value.startsWith('HISTORY:')) {
+            const idx = parseInt(value.split(':')[1]);
+            const entry = history[idx];
+            if (entry) {
+                onLoadTemplate(entry.data);
+            }
+        } else if (value && TEMPLATES[value]) {
+            onLoadTemplate(TEMPLATES[value]);
         }
+
+        e.target.value = ""; // Reset selection
     };
 
     return (
@@ -53,11 +61,24 @@ const EditorControls = ({ onFormat, onMinify, onClear, onUpload, onCopy, onLoadT
                         defaultValue=""
                     >
                         <option value="" disabled className="bg-background-secondary text-text-primary">Select Template...</option>
-                        {Object.keys(TEMPLATES).map(name => (
-                            <option key={name} value={name} className="bg-background-secondary text-text-primary hover:bg-white/10">
-                                {name}
-                            </option>
-                        ))}
+
+                        <optgroup label="Templates">
+                            {Object.keys(TEMPLATES).map(name => (
+                                <option key={name} value={name} className="bg-background-secondary text-text-primary hover:bg-white/10">
+                                    {name}
+                                </option>
+                            ))}
+                        </optgroup>
+
+                        {history && history.length > 0 && (
+                            <optgroup label="Historial (Auto-saved)">
+                                {history.map((entry, idx) => (
+                                    <option key={`hist-${entry.timestamp}`} value={`HISTORY:${idx}`} className="bg-background-secondary text-text-secondary">
+                                        {new Date(entry.timestamp).toLocaleTimeString()} - {entry.preview || 'Snapshot'}
+                                    </option>
+                                ))}
+                            </optgroup>
+                        )}
                     </select>
                 </div>
 

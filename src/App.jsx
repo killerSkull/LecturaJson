@@ -4,8 +4,10 @@ import SplitView from './components/Layout/SplitView';
 import JsonEditor from './components/Editor/JsonEditor';
 import PreviewPanel from './components/Preview/PreviewPanel';
 import { useJsonParser } from './hooks/useJsonParser';
+
 import { useDeepLink } from './hooks/useDeepLink';
 import ConfirmationModal from './components/UI/ConfirmationModal';
+import { useHistory } from './hooks/useHistory';
 
 // Sample data for initial load
 const SAMPLE_DATA = {
@@ -66,6 +68,9 @@ function App() {
     handleTextChange,
     setJson
   } = useJsonParser();
+
+  // Initialize History Hook
+  const { history } = useHistory(parsedData);
 
   // Load sample data on mount ONLY if no hash exists AND no local storage
   useEffect(() => {
@@ -146,6 +151,7 @@ function App() {
             onTextChange={handleTextChange}
             error={error}
             onLoadTemplate={handleTemplateLoad}
+            history={history}
           />
 
           {/* Preview Panel (Right) */}
